@@ -29,7 +29,5 @@ namespace MGVGBlog.Models
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<MGVGBlog.Models.Post> Posts { get; set; }
     }
 }
