@@ -1,3 +1,7 @@
+using MGVGBlog.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+
 namespace MGVGBlog.Migrations
 {
     using System;
@@ -27,6 +31,13 @@ namespace MGVGBlog.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            //context.Roles.AddOrUpdate(r => r.Name,
+            //    new IdentityRole { Name = "Admin" },
+            //    new IdentityRole { Name = "Member" }
+            //    );
+
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            UserManager.AddToRole("ad34cbde-7a0d-40d1-af20-7c6b088b4b2c", "Admin");
         }
     }
 }
