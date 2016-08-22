@@ -9,6 +9,11 @@ namespace MGVGBlog.Models
 {
     public class Post
     {
+        public Post()
+        {
+            Date = DateTime.Now;
+        }
+
         [Key]
         public int Id { get; set; }
 
