@@ -31,5 +31,7 @@ namespace MGVGBlog.Models
         }
 
         public System.Data.Entity.DbSet<MGVGBlog.Models.Post> Posts { get; set; }
+
+        public System.Data.Entity.DbSet<MGVGBlog.Models.Comments> Comments { get; set; }
     }
 }
