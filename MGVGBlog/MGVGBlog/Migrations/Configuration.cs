@@ -36,8 +36,8 @@ namespace MGVGBlog.Migrations
             //    new IdentityRole { Name = "Member" }
             //    );
 
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            UserManager.AddToRole("ad34cbde-7a0d-40d1-af20-7c6b088b4b2c", "Admin");
+            //var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            //UserManager.AddToRole("ad34cbde-7a0d-40d1-af20-7c6b088b4b2c", "Admin");
         }
     }
 }

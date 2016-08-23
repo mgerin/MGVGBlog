@@ -17,12 +17,16 @@ namespace MGVGBlog.Controllers
         // GET: Posts
         public ActionResult Index()
         {
+            List<Post> posts = db.Posts.Include(p => p.Author).OrderBy(p => p.Id).ToList();
+            ViewBag.posts = posts;
             return View(db.Posts.ToList());
         }
 
         // GET: Posts/Details/5
         public ActionResult Details(int? id)
         {
+            List<Post> posts = db.Posts.Include(p => p.Author).OrderBy(p => p.Id).ToList();
+            ViewBag.posts = posts;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
