@@ -39,6 +39,10 @@
     <dl class="dl-horizontal">
         <dd>
             <h3>Comments: @ViewBag.commentsCount</h3>
+            <div>
+                @*<a href="/Comments/Create"><h3>Comment</h3></a>*@
+                @Html.ActionLink("Comments", "Create", "Comments")
+            </div>
             <div class="border">
                 @foreach (var comment in ViewBag.comments)
                 {

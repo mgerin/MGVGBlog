@@ -39,7 +39,7 @@ namespace MGVGBlog.Controllers
         // GET: Comments/Create
         public ActionResult Create()
         {
-            ViewBag.PostId = new SelectList(db.Posts, "Id", "Title");
+            
             return View();
         }
 
@@ -53,6 +53,9 @@ namespace MGVGBlog.Controllers
             if (ModelState.IsValid)
             {
                 comments.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+
+                var id = (int)Session["id"];
+                comments.PostId = db.Posts.Find(id).Id;
                 db.Comments.Add(comments);
                 db.SaveChanges();
                 return RedirectToAction("Index");

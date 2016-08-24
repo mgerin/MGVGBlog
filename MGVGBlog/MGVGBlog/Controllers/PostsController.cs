@@ -40,6 +40,9 @@ namespace MGVGBlog.Controllers
             List<Comments> coments = db.Comments.Include(c => c.Author).Where(c => c.PostId == id).OrderByDescending(c => c.Date).ToList();
             ViewBag.comments = coments;
             ViewBag.commentsCount = coments.Count;
+
+            Session["id"] = post.Id;
+
             return View(post);
         }
 
@@ -68,7 +71,7 @@ namespace MGVGBlog.Controllers
 
             return View(post);
         }
-
+        [Authorize]
         // GET: Posts/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -79,7 +82,7 @@ namespace MGVGBlog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            if (ViewBag.postAuthor != User.Identity.Name || User.IsInRole("Member"))
+            if (ViewBag.postAuthor != User.Identity.Name && User.IsInRole("Member"))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
