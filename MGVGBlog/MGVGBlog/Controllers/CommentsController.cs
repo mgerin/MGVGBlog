@@ -52,6 +52,7 @@ namespace MGVGBlog.Controllers
         {
             if (ModelState.IsValid)
             {
+                comments.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 db.Comments.Add(comments);
                 db.SaveChanges();
                 return RedirectToAction("Index");

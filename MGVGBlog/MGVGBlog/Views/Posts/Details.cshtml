@@ -1,4 +1,5 @@
-﻿@model MGVGBlog.Models.Post
+﻿@using MGVGBlog.Models
+@model MGVGBlog.Models.Post
 
 @{
     ViewBag.Title = "Details";
@@ -34,14 +35,29 @@
                 @Html.DisplayFor(model => model.Author.UserName)
             </i>
         </dd>
-
     </dl>
     
+    <div>
+        @*@ViewBag.commentsCount*@
+    </div>
+    <dl class="dl-horizontal">
+        <dd class="comments">
+            <h3>Comments</h3>
+            <i>
+                @foreach (var comment in ViewBag.comments)
+                {
+                    <br/>
+                    @comment.Text
+                    <br/>
+                }
+            </i>
+        </dd>
+    </dl>
 </div>
 <p>
     @if (Model.Author.UserName == User.Identity.Name || User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) 
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
     }
     |
     @Html.ActionLink("Back to List", "Index") |

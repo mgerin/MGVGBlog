@@ -8,6 +8,11 @@ namespace MGVGBlog.Models
 {
     public class Comments
     {
+        public Comments()
+        {
+            Date = DateTime.Now;
+        }
+
         public int Id { get; set; }
 
         [Required]

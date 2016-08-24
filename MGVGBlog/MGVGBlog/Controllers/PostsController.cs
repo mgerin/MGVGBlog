@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using MGVGBlog.Models;
 
 namespace MGVGBlog.Controllers
@@ -36,6 +37,8 @@ namespace MGVGBlog.Controllers
             {
                 return HttpNotFound();
             }
+            List<Comments> coments = db.Comments.Include(c => c.Author).Where(c => c.PostId == id).OrderByDescending(c => c.Date).ToList();
+            ViewBag.comments = coments;
             return View(post);
         }
 
@@ -68,11 +71,18 @@ namespace MGVGBlog.Controllers
         // GET: Posts/Edit/5
         public ActionResult Edit(int? id)
         {
+            Post post = db.Posts.Find(id);
+            List<Post> wqer = db.Posts.Include(p => p.Author).OrderBy(p => p.Id).ToList();
+            ViewBag.postAuthor = post.Author.UserName;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            if (ViewBag.postAuthor != User.Identity.Name || User.IsInRole("Member"))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+            post = db.Posts.Find(id);
             if (post == null)
             {
                 return HttpNotFound();
