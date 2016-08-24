@@ -39,6 +39,7 @@ namespace MGVGBlog.Controllers
             }
             List<Comments> coments = db.Comments.Include(c => c.Author).Where(c => c.PostId == id).OrderByDescending(c => c.Date).ToList();
             ViewBag.comments = coments;
+            ViewBag.commentsCount = coments.Count;
             return View(post);
         }
 

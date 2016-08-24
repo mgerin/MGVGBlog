@@ -16,7 +16,7 @@
             <h2>@text.Title</h2>
             <div>
                 Posted on <i>@text.Date.ToString("dd MMM yyyy")</i>
-                by: <i>@text.Author.UserName</i>
+                by: <i><a href="/ApplicationUsers/Details/@text.Author.Id">@text.Author.UserName</a></i>
             </div>
             <br />
             <p>

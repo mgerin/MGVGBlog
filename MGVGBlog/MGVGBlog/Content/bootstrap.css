@@ -621,6 +621,24 @@ dd {
   .dl-horizontal dd {
     margin-left: 180px;
   }
+  .dl-horizontal .border {
+      padding-top: 70px;
+      padding-bottom: 60px;
+  }
+  .dl-horizontal .comment-meta {
+      margin: 20px;
+      border-style: groove;
+      background-color: whitesmoke;
+      border-radius: 45px;
+      padding: 25px;
+      padding-bottom: 40px;
+      text-align: left;
+      margin: 50px;
+  }
+  .dl-horizontal .comment-meta .date {
+      float: right;
+  }
+  }
   .dl-horizontal dd:before,
   .dl-horizontal dd:after {
     display: table;
