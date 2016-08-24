@@ -58,7 +58,7 @@ namespace MGVGBlog.Controllers
                 comments.PostId = db.Posts.Find(id).Id;
                 db.Comments.Add(comments);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("/Posts/Details/" + Session["id"]);
             }
 
             ViewBag.PostId = new SelectList(db.Posts, "Id", "Title", comments.PostId);
