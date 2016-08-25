@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using System.Web.UI.WebControls;
 using MGVGBlog.Models;
 
 namespace MGVGBlog.Controllers
@@ -15,6 +17,7 @@ namespace MGVGBlog.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ApplicationUsers
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Users.ToList());

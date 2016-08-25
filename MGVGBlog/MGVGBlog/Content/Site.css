@@ -22,4 +22,19 @@ select,
 textarea {
     max-width: 280px;
 }
-
+.dl-horizontal .border {
+      padding-top: 5px;
+      padding-bottom: 60px;
+  }
+  .dl-horizontal .comment-meta {
+      border-style: groove;
+      background-color: whitesmoke;
+      border-radius: 45px;
+      padding: 25px;
+      padding-bottom: 15px;
+      text-align: left;
+      margin: 50px;
+  }
+  .dl-horizontal .comment-meta .date {
+      float: right;
+  }

@@ -1,44 +1,30 @@
 ﻿@model IEnumerable<MGVGBlog.Models.Post>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Posts";
 }
 
-<h2>Index</h2>
+<h2>Posts</h2>
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Body)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Author.UserName)
-        </th>
-        <th></th>
-    </tr>
-    
+
 @foreach (var post in ViewBag.posts) {
-    <tr>
-        <td>
-            <h5><a href="/Posts/Details/@post.Id">@post.Title</a></h5>
-        </td>
-        <td>
+    <dl class="dl-horizontal">
+        <dd>
+            <h2><a href="/Posts/Details/@post.Id">@post.Title</a>
+            </h2>
+        </dd>
+        <dd>
+            <span class="glyphicon glyphicon-time"></span>
+            <small class="date">@post.Date</small>
+        </dd>
+        <dd>
             @MGVGBlog.Classes.Utils.CutText(post.Body, 600)
-        </td>
-        <td>
-            @post.Date
-        </td>
-        <td>
-            @post.Author.UserName
-        </td>
-        <td>
+        </dd>
+        <dd>
+            <a href="/ApplicationUsers/Details/@post.Author.Id">@post.Author.UserName</a>
+        </dd>
+        <dd>
             @if (User.IsInRole("Admin"))
             {
                 @Html.ActionLink("Edit", "Edit", new { id = post.Id }) @:|
@@ -50,9 +36,9 @@
             {
                @:| @Html.ActionLink("Delete", "Delete", new { id = post.Id })
             }
-            
-        </td>
-    </tr>
+            <hr />
+        </dd>
+    </dl>
 }
 
 </table>

@@ -38,11 +38,12 @@
     </dl>
     <dl class="dl-horizontal">
         <dd>
-            <h3>Comments: @ViewBag.commentsCount</h3>
-            <div>
-                @*<a href="/Comments/Create"><h3>Comment</h3></a>*@
-                @Html.ActionLink("Comments", "Create", "Comments")
-            </div>
+            <h4><span class="badge">@ViewBag.commentsCount</span> Comments:</h4>
+            <span>
+                <h3>
+                    @Html.ActionLink("New Comment", "Create", "Comments")
+                </h3>
+            </span>
             <div class="border">
                 @foreach (var comment in ViewBag.comments)
                 {
@@ -50,11 +51,18 @@
                     <div class="comment-meta">
                         @if (comment != null)
                         {
-                            <p><a href="/ApplicationUsers/Details/@Html.ValueForModel(Model.Author.Id)">@comment.Author.UserName</a></p>
+                            <p><a href="/ApplicationUsers/Details/@Html.ValueForModel(Model.Author.Id)">@comment.Author.UserName</a>
+                            </p>
                             <p>@comment.Text</p>
-                            <p class="date">@comment.Date</p>
+                            <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-up"></a>
+                            <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-down"></a>
+                            <span class="date">
+                                <span class="glyphicon glyphicon-time"></span>
+                                <small>@comment.Date</small>
+                            </span>
                         }
                     </div>
+                    <hr/>
                 }
             </div>
         </dd>

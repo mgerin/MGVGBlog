@@ -6,46 +6,32 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Post.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Text)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Points)
-        </th>
-        <th></th>
-    </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
+    <dl class="dl-horizontal">
+        <dt>
             @Html.DisplayFor(modelItem => item.Post.Title)
-        </td>
-        <td>
+        </dt>
+
+        <dd>
             @Html.DisplayFor(modelItem => item.Text)
-        </td>
-        <td>
+        </dd>
+
+        <dd>
             @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
+        </dd>
+
+        <dd>
             @Html.DisplayFor(modelItem => item.Points)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+        </dd>
+
+        <dd>
+            @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+            @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+            @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+        </dd>
+    </dl>
+    <hr />
 }
 
 </table>
