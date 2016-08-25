@@ -12,6 +12,7 @@ namespace MGVGBlog.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
 
+        [RequireHttps]
         public ActionResult Index()
         {
             List<Post> postsThree = db.Posts.Include(p => p.Author).OrderByDescending(p => p.Date).Take(3).ToList();

@@ -58,11 +58,11 @@ namespace MGVGBlog
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "360542603075-iemqipn3agjteqetb2n7o2o9eecptivn.apps.googleusercontent.com",
+                ClientSecret = "FcFQzyB29LUMkbW3dki9aIl-"
+            });
         }
     }
 }
