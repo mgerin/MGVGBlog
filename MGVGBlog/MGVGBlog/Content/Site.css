@@ -39,3 +39,17 @@ textarea {
       float: right;
   }
 
+.glyphicon-user {
+    top: 20px;
+    left: 13px;
+}
+
+.glyphicon-log-in {
+    top: 20px;
+    left: 10px;
+}
+
+.glyphicon-log-out {
+    top: 20px;
+    right: 13px;
+}

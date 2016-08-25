@@ -54,9 +54,9 @@ namespace MGVGBlog
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "143058786140237",
+               appSecret: "80301fedc0639248f7ed8e6dfcc97476");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
