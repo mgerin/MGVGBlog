@@ -11,19 +11,19 @@
     <h4>Post</h4>
     <hr />
     <dl class="dl-horizontal">
-        <h1>
-            <dd>
+        <dd>
+            <h1>
                 @Html.DisplayFor(model => model.Title)
-            </dd>
-        </h1>
-        <i>
-            <dd>
+            </h1>
+        </dd>
+        <dd>
+            <i>
                 Posted on:
                 @Html.DisplayFor(model => model.Date)
-            </dd>
-        </i>
-        <br />
-
+            </i>
+            <br />
+        </dd>
+        
         <dd>
             @Html.DisplayFor(model => model.Body)
         </dd>
@@ -39,11 +39,11 @@
     <dl class="dl-horizontal">
         <dd>
             <h4><span class="badge">@ViewBag.commentsCount</span> Comments:</h4>
-            <span>
-                <h3>
+            <h3>
+                <span>
                     @Html.ActionLink("New Comment", "Create", "Comments")
-                </h3>
-            </span>
+                </span>
+            </h3>
             <div class="border">
                 @foreach (var comment in ViewBag.comments)
                 {
@@ -51,7 +51,8 @@
                     <div class="comment-meta">
                         @if (comment != null)
                         {
-                            <p><a href="/ApplicationUsers/Details/@Html.ValueForModel(Model.Author.Id)">@comment.Author.UserName</a>
+                            <p>
+                                <a href="/ApplicationUsers/Details/@Html.ValueForModel(Model.Author.Id)">@comment.Author.UserName</a>
                             </p>
                             <p>@comment.Text</p>
                             <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-up"></a>
@@ -62,7 +63,7 @@
                             </span>
                         }
                     </div>
-                    <hr/>
+                    <hr />
                 }
             </div>
         </dd>
