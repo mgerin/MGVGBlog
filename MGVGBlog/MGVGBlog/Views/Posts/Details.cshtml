@@ -38,12 +38,21 @@
     </dl>
     <dl class="dl-horizontal">
         <dd>
-            <h4><span class="badge">@ViewBag.commentsCount</span> Comments:</h4>
-            <h3>
+            @*<h3>
                 <span>
                     @Html.ActionLink("New Comment", "Create", "Comments")
                 </span>
-            </h3>
+            </h3>*@
+
+            <h4>Leave a Comment:</h4>
+            <form role="form">
+                <div class="form-group">
+                    <textarea class="form-control" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+            <br><br>
+            <p><span class="badge">@ViewBag.commentsCount</span> Comments:</p>
             <div class="border">
                 @foreach (var comment in ViewBag.comments)
                 {

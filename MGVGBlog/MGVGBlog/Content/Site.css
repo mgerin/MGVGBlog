@@ -53,3 +53,8 @@ textarea {
     top: 20px;
     right: 13px;
 }
+.form-control {
+    max-width: 100%;
+    width: 100%;
+    border: 1px solid #128f76;
+}
