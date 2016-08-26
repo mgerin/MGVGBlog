@@ -45,12 +45,20 @@
             </h3>*@
 
             <h4>Leave a Comment:</h4>
-            <form role="form">
+            @*<form role="form">
                 <div class="form-group">
                     <textarea class="form-control" rows="3" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-success">Submit</button>
-            </form>
+            </form>*@
+            @using (Html.BeginForm("Create", "Comments"))
+            {
+                @Html.AntiForgeryToken()
+                <textarea class="form-control" rows="3" required name="Text"></textarea>
+                <br/>
+                @*<input type="text" name="Text"/>*@
+                <button type="submit" class="btn btn-success">Submit</button>
+            }
             <br><br>
             <p><span class="badge">@ViewBag.commentsCount</span> Comments:</p>
             <div class="border">
