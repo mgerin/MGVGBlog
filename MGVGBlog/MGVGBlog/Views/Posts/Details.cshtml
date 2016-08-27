@@ -45,20 +45,35 @@
             </h3>*@
 
             <h4>Leave a Comment:</h4>
+            @{
+                if (User.Identity.IsAuthenticated)
+                {
             @*<form role="form">
                 <div class="form-group">
                     <textarea class="form-control" rows="3" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-success">Submit</button>
             </form>*@
-            @using (Html.BeginForm("Create", "Comments"))
-            {
-                @Html.AntiForgeryToken()
-                <textarea class="form-control" rows="3" required name="Text"></textarea>
-                <br/>
+                    using (Html.BeginForm("Create", "Comments"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <textarea class="form-control-comment" rows="5" required name="Text"></textarea>
+                        <br/>
                 @*<input type="text" name="Text"/>*@
-                <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    }
+                }
+                else
+                {
+                    
+                        ViewBag.Title = "2";
+                        ViewBag.ReturnUrl = "/Posts/Details/" + Model.Id;
+                    
+                    <h2>You must @Html.ActionLink("Login", "Login", new { area = "", controller = "Account", ReturnUrl = ViewBag.ReturnUrl }, new { id = "loginLink" })
+</h2>
+                }
             }
+            
             <br><br>
             <p><span class="badge">@ViewBag.commentsCount</span> Comments:</p>
             <div class="border">
@@ -80,7 +95,6 @@
                             </span>
                         }
                     </div>
-                    <hr />
                 }
             </div>
         </dd>

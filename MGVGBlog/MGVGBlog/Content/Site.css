@@ -27,13 +27,11 @@ textarea {
       padding-bottom: 60px;
   }
   .dl-horizontal .comment-meta {
-      border-style: groove;
-      background-color: whitesmoke;
-      border-radius: 45px;
-      padding: 25px;
-      padding-bottom: 15px;
+      
+      padding: -40px;
+      padding-bottom: 5px;
       text-align: left;
-      margin: 50px;
+      margin: 40px;
   }
   .dl-horizontal .comment-meta .date {
       float: right;
@@ -53,8 +51,14 @@ textarea {
     top: 20px;
     right: 13px;
 }
-.form-control {
+.form-control-comment {
     max-width: 100%;
     width: 100%;
     border: 1px solid #128f76;
+}
+body {
+    background: white;
+}
+.body-content {
+    background: whitesmoke;
 }
