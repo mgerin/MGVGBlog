@@ -6,7 +6,13 @@
     @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
-            <li class="glyphicon glyphicon-user"></li>
+            @*<li class="glyphicon glyphicon-user"></li>*@
+            <li>
+                @{
+                    var imgUrl = Url.Content("~/Content/images/profile/" + User.Identity.GetUserName() + ".png" + "? time=" + DateTime.Now);
+                }
+                <img src="@imgUrl" height="40" width="40" alt="profile"/>
+            </li>
             <li>
                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})
             </li>
