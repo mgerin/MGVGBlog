@@ -53,15 +53,15 @@ namespace MGVGBlog.Controllers
             {
                 reply.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
 
-                var id = (int)Session["commentId"];
+                //var id = (int)Session["commentId"];
                 var postId = (int) Session["id"];
 
-                reply.CommentId = db.Comments.Find(id).Id;
+                //reply.CommentId = db.Comments.Find(id).Id;
                 reply.Points = 0;
                 reply.PostId = postId;
                 db.Replies.Add(reply);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("/Posts/Details/" + Session["id"]);
             }
 
             ViewBag.CommentsId = new SelectList(db.Comments, "Id", "Text", reply.CommentId);

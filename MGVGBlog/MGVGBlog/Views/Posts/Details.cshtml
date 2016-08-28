@@ -108,6 +108,7 @@
                                                 {
                                                     @Html.AntiForgeryToken()
                                                     <textarea class="form-control-comment" rows="2" required name="Text"></textarea>
+                                                    <input class="form-control-comment" type="hidden" value="@comment.Id" name="CommentId"/>
                                                     <button type="submit" class="btn btn-success">Reply</button>
                                                 }
                                             }
@@ -154,7 +155,7 @@
                                     }
 
                                 </div>
-                                Session["commentId"] = comment.Id;
+                                //Session["commentId"] = comment.Id;
                                 @*<div class="reply-form-controler" date role="reply-form">
                                     <form class="reply-expanded">
                                         <div class="postbox"></div>
