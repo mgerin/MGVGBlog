@@ -24,7 +24,7 @@ namespace MGVGBlog.Controllers
         // GET: Comments/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+           if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -33,7 +33,8 @@ namespace MGVGBlog.Controllers
             {
                 return HttpNotFound();
             }
-            return View(comments);
+
+           return View(comments);
         }
 
         // GET: Comments/Create

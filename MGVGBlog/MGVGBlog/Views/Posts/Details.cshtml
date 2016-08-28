@@ -64,11 +64,12 @@
             }
 
             <br><br>
+            
             <p><span class="badge">@ViewBag.commentsCount</span> Comments:</p>
             <div class="border">
                 @foreach (var comment in ViewBag.comments)
                 {
-
+                    
                     <div class="comment-meta">
                         @if (comment != null)
                         {
@@ -94,11 +95,64 @@
                                 <span>|</span>
                                 <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-down"></a>
                                 <span>|</span>
-                                <a href="#" data-action="reply" data-tid="2"> Replay</a>
+                                <span>
+                                      @if (User.Identity.IsAuthenticated)
+                                            {
+                                                // <a href="/Replies/Create/" data-action="Create" data-tid="2"> Replay</a>
+                                                using (Html.BeginForm("Create", "Replies"))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    <textarea class="form-control-comment" rows="2" required name="Text"></textarea>
+                                                    <br />
+                                                    <button type="submit" class="btn btn-success">Reply</button>
+                                                }
+                                            }
+                                </span>
+
                                 <span class="date">
                                     <span class="glyphicon glyphicon-time"></span>
                                     <small>@comment.Date</small>
+                                    <small>@comment.Id</small>
                                 </span>
+                                <div class="border">
+                                    @foreach (var reply in ViewBag.replies)
+                                    {
+                                        <div class="comment-meta">
+                                            @if (reply != null)
+                                            {
+                                                var replyImgUrl = Url.Content("~/Content/images/profile/" + reply.Author.UserName + ".png" + "? time=" + DateTime.Now);
+                                                var replyImgDafault = Url.Content("~/Content/images/profile/dafault/default-profile-pic.gif");
+                                                <p>
+                                                    @{
+                                                        if (File.Exists(Server.MapPath("~/Content/images/profile/" + reply.Author.UserName + ".png")))
+                                                        {
+
+                                                            <a href="/ApplicationUsers/Details/@reply.Author.Id"><img class="img-circle" src="@replyImgUrl" height="45" width="45" alt="profile-user"/> @reply.Author.UserName</a>
+                                                        }
+                                                        else
+                                                        {
+
+                                                            <a href="/ApplicationUsers/Details/@reply.Author.Id"><img class="img-circle" src="@replyImgDafault" height="45" width="45" alt="profile-default"/> @reply.Author.UserName</a>
+                                                        }
+                                                    }
+                                                </p>
+
+                                                <p>@reply.Text</p>
+                                                <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-up"></a>
+                                                <span>|</span>
+                                                <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-down"></a>
+                                              }
+
+                                            <span class="date">
+                                                <span class="glyphicon glyphicon-time"></span>
+                                                <small>@reply.Date</small>
+                                                
+                                            </span>
+                                        </div>
+                                    }
+
+                                </div>
+                                Session["commentId"] = comment.Id;
                                 @*<div class="reply-form-controler" date role="reply-form">
                                     <form class="reply-expanded">
                                         <div class="postbox"></div>

@@ -40,8 +40,13 @@ namespace MGVGBlog.Controllers
             List<Comments> coments = db.Comments.Include(c => c.Author).Where(c => c.PostId == id).OrderByDescending(c => c.Date).ToList();
             ViewBag.comments = coments;
             ViewBag.commentsCount = coments.Count;
+            List<Reply> replies =
+                db.Replies.Include(r => r.Author).Where(r => r.PostId == id).OrderByDescending(r => r.Date).ToList();
+            ViewBag.replies = replies;
+           
 
             Session["id"] = post.Id;
+            
 
             return View(post);
         }

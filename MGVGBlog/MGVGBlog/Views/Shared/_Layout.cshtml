@@ -30,6 +30,10 @@
                     <li>@Html.ActionLink("Comments", "Index", "Comments")</li>
                     @if (Request.IsAuthenticated)
                     {
+                        <li>@Html.ActionLink("Replies", "Index", "Replies")</li>
+                    }
+                    @if (Request.IsAuthenticated)
+                    {
                         <li>@Html.ActionLink("Users", "Index", "ApplicationUsers")</li>
                     }
                     <li>@Html.ActionLink("About", "About", "Home")</li>
