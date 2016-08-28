@@ -1,4 +1,5 @@
-﻿body {
+﻿
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -61,4 +62,13 @@ body {
 }
 .body-content {
     background: whitesmoke;
+}
+.profile-photo a {
+    bottom: 5px;
+    font-style: normal;
+}
+.form-control-post {
+    max-width: 100%;
+    width: 50%;
+    border: 1px solid #128f76;
 }

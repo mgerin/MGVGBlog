@@ -18,10 +18,10 @@
                 var imgUrl = Url.Content("~/Content/images/profile/" + User.Identity.GetUserName() + ".png" + "? time=" + DateTime.Now);
                 <div class="upimage">
                     <div class="accimg">
-                        @*@if (File.Exists("~/Content/images/profile/" + User.Identity.GetUserName() + ".png"))*@
-                        @*{*@
-                            <img src="@imgUrl" height="250" width="250" />
-                        @*}*@
+                        @if (File.Exists(Server.MapPath("~/Content/images/profile/" + User.Identity.GetUserName() + ".png")))
+                        {
+                            <img src="@imgUrl" height="250" width="250"/>
+                        }
                     </div>
                     <div class="mngimg">
                         @using (Html.BeginForm("UploadPhoto", "Manage", FormMethod.Post, new {enctype = "multipart/form-data"}))

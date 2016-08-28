@@ -3,29 +3,35 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
-            @*<li class="glyphicon glyphicon-user"></li>*@
-            <li>
+            <li class="profile-photo">
                 @{
                     var imgUrl = Url.Content("~/Content/images/profile/" + User.Identity.GetUserName() + ".png" + "? time=" + DateTime.Now);
                 }
-                <img src="@imgUrl" height="40" width="40" alt="profile"/>
-            </li>
-            <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})
+                @{
+                    if (File.Exists(Server.MapPath("~/Content/images/profile/" + User.Identity.GetUserName() + ".png")))
+                    {
+                        <a href="@Url.Action("Index", "Manage")"><img class="img-circle" src="@imgUrl" height="35" width="35" alt="profile-user" /> Hello @User.Identity.GetUserName() !</a> 
+                    }
+                    else
+                    {
+                        var imgDafalt = Url.Content("~/Content/images/profile/dafault/default-profile-pic.gif");
+                        <a href="@Url.Action("Index", "Manage")"><img class="img-circle" src="@imgDafalt" height="35" width="35" alt="profile-default" /> Hello @User.Identity.GetUserName() !</a>
+                    }
+                }
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
             <li class="glyphicon glyphicon-log-out"></li>
         </ul>
-    }
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</li>
-        <li class="glyphicon glyphicon-log-in"></li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
-}
+                        }
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                            <li class="glyphicon glyphicon-log-in"></li>
+                            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                        </ul>
+                    }

@@ -1,4 +1,5 @@
 ﻿@using MGVGBlog.Models
+@using Microsoft.AspNet.Identity
 @model MGVGBlog.Models.Post
 
 @{
@@ -23,7 +24,7 @@
             </i>
             <br />
         </dd>
-        
+
         <dd>
             @Html.DisplayFor(model => model.Body)
         </dd>
@@ -38,42 +39,30 @@
     </dl>
     <dl class="dl-horizontal">
         <dd>
-            @*<h3>
-                <span>
-                    @Html.ActionLink("New Comment", "Create", "Comments")
-                </span>
-            </h3>*@
-
             <h4>Leave a Comment:</h4>
             @{
                 if (User.Identity.IsAuthenticated)
                 {
-            @*<form role="form">
-                <div class="form-group">
-                    <textarea class="form-control" rows="3" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-success">Submit</button>
-            </form>*@
                     using (Html.BeginForm("Create", "Comments"))
                     {
                         @Html.AntiForgeryToken()
                         <textarea class="form-control-comment" rows="5" required name="Text"></textarea>
-                        <br/>
-                @*<input type="text" name="Text"/>*@
+                        <br />
                         <button type="submit" class="btn btn-success">Submit</button>
                     }
                 }
                 else
                 {
-                    
-                        ViewBag.Title = "2";
-                        ViewBag.ReturnUrl = "/Posts/Details/" + Model.Id;
-                    
-                    <h2>You must @Html.ActionLink("Login", "Login", new { area = "", controller = "Account", ReturnUrl = ViewBag.ReturnUrl }, new { id = "loginLink" })
-</h2>
+
+                    ViewBag.Title = "2";
+                    ViewBag.ReturnUrl = "/Posts/Details/" + Model.Id;
+
+                    <h2>
+                        You must @Html.ActionLink("Login", "Login", new { area = "", controller = "Account", ReturnUrl = ViewBag.ReturnUrl }, new { id = "loginLink" })
+                    </h2>
                 }
             }
-            
+
             <br><br>
             <p><span class="badge">@ViewBag.commentsCount</span> Comments:</p>
             <div class="border">
@@ -83,16 +72,39 @@
                     <div class="comment-meta">
                         @if (comment != null)
                         {
-                            <p>
-                                <a href="/ApplicationUsers/Details/@comment.Author.Id">@comment.Author.UserName</a>
-                            </p>
-                            <p>@comment.Text</p>
-                            <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-up"></a>
-                            <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-down"></a>
-                            <span class="date">
-                                <span class="glyphicon glyphicon-time"></span>
-                                <small>@comment.Date</small>
-                            </span>
+                            {
+                                var imgUrl = Url.Content("~/Content/images/profile/" + comment.Author.UserName + ".png" + "? time=" + DateTime.Now);
+                                var imgDafault = Url.Content("~/Content/images/profile/dafault/default-profile-pic.gif");
+                                <p>
+                                    @{
+                                        if (File.Exists(Server.MapPath("~/Content/images/profile/" + comment.Author.UserName + ".png")))
+                                        {
+                                            
+                                            <a href="/ApplicationUsers/Details/@comment.Author.Id"><img class="img-circle" src="@imgUrl" height="45" width="45" alt="profile-user" /> @comment.Author.UserName</a>
+                                        }
+                                        else
+                                        {
+                                            
+                                            <a href="/ApplicationUsers/Details/@comment.Author.Id"><img class="img-circle" src="@imgDafault" height="45" width="45" alt="profile-default" /> @comment.Author.UserName</a>
+                                        }
+                                    }
+                                </p>
+                                <p>@comment.Text</p>
+                                <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-up"></a>
+                                <span>|</span>
+                                <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-down"></a>
+                                <span>|</span>
+                                <a href="#" data-action="reply" data-tid="2"> Replay</a>
+                                <span class="date">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                    <small>@comment.Date</small>
+                                </span>
+                                @*<div class="reply-form-controler" date role="reply-form">
+                                    <form class="reply-expanded">
+                                        <div class="postbox"></div>
+                                    </form>
+                                </div>*@
+                            }
                         }
                     </div>
                 }
