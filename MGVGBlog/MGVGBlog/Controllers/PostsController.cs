@@ -42,6 +42,8 @@ namespace MGVGBlog.Controllers
             ViewBag.commentsCount = coments.Count;
             List<Reply> replies =
                 db.Replies.Include(r => r.Author).Where(r => r.PostId == id).OrderByDescending(r => r.Date).ToList();
+            
+            
             ViewBag.replies = replies;
            
 
