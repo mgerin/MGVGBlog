@@ -4,16 +4,26 @@
 @model MGVGBlog.Models.Post
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('.file').hide();
+    $(document)
+        .ready(function() {
+            $('.file').hide();
 
-        $('a.hide-show').click(function () {
-            $('span.file', this.parentNode).slideToggle(0);
-            $(this).text($(this).text() == 'Cancel' ? 'Reply' : 'Cancel');
-            $(this).toggleClass("active");
-            return false;
+            $('a.hide-show')
+                .click(function() {
+                    $('span.file', this.parentNode).slideToggle(0);
+                    $(this).text($(this).text() == 'Cancel' ? 'Reply' : 'Cancel');
+                    $(this).toggleClass("active");
+                    return false;
+                });
         });
-    });
+</script>
+<script>
+    $('#a_is_valid').on('click', handleClick)
+    function handleClick() {
+        $(this).off('click');
+        alert('click');
+    }
+    $('#a_is_valid2').one('click', function () { alert('just once') });
 </script>
 @{
     ViewBag.Title = "Details";
@@ -104,7 +114,9 @@
                                     }
                                 </p>
                                 <p>@comment.Text</p>
-                                <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-up"></a>
+                                @comment.Points
+                                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                                @Html.ActionLink("Like","Like",  new { id = comment.Id , postId = comment.PostId}, new { @id = "a_is_valid" } )
                                 <span>|</span>
                                 <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-down"></a>
                                 <span class="date">

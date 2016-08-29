@@ -5,13 +5,27 @@
 }
 
 <h2>Posts</h2>
+@using (Html.BeginForm("Index", "Posts", FormMethod.Get))
+{
+    <span class="search">
+        @Html.TextBox("search")
+        <input type="submit" value="Search" />
+    </span>
+}
+
+@if (ViewBag.posts == null)
+{
+    <div>Search didn't finde anything</div>
+}
+
+@foreach (var post in ViewBag.posts)
+{
 
 
-
-@foreach (var post in ViewBag.posts) {
     <dl class="dl-horizontal">
         <dd>
-            <h2><a href="/Posts/Details/@post.Id">@post.Title</a>
+            <h2>
+                <a href="/Posts/Details/@post.Id">@post.Title</a>
             </h2>
         </dd>
         <dd>
@@ -31,10 +45,10 @@
             }
 
             @*@Html.ActionLink("Details", "Details", new {id = post.Id})*@
-            
+
             @if (User.IsInRole("Admin"))
             {
-               @:| @Html.ActionLink("Delete", "Delete", new { id = post.Id })
+                @:| @Html.ActionLink("Delete", "Delete", new { id = post.Id })
             }
             <hr />
         </dd>
