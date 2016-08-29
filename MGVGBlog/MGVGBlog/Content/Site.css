@@ -81,3 +81,12 @@ body {
     margin-bottom: 40px;
     margin-top: 40px;
 }
+.search {
+    float: right;
+}
+.form-control-new-post {
+    max-width: 90%;
+    width: 100%;
+    border: 1px solid #128f76;
+    
+}
