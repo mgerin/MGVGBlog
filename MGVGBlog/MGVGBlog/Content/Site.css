@@ -73,3 +73,11 @@ body {
     width: 50%;
     border: 1px solid #128f76;
 }
+.comment-reply {
+    margin-left: 100px;
+    margin-top: 50px;
+}
+.reply-text {
+    margin-bottom: 40px;
+    margin-top: 40px;
+}

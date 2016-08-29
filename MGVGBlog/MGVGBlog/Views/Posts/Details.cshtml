@@ -2,7 +2,19 @@
 @using MGVGBlog.Models
 @using Microsoft.AspNet.Identity
 @model MGVGBlog.Models.Post
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.file').hide();
 
+        $('a.hide-show').click(function () {
+            $('span.file', this.parentNode).slideToggle(0);
+            $(this).text($(this).text() == 'Cancel' ? 'Reply' : 'Cancel');
+            $(this).toggleClass("active");
+            return false;
+        });
+    });
+</script>
 @{
     ViewBag.Title = "Details";
 }
@@ -65,12 +77,12 @@
             }
 
             <br><br>
-            
+
             <p><span class="badge">@ViewBag.commentsCount</span> Comments:</p>
             <div class="border">
                 @foreach (var comment in ViewBag.comments)
                 {
-                    
+
                     <div class="comment-meta">
                         @if (comment != null)
                         {
@@ -81,12 +93,12 @@
                                     @{
                                         if (File.Exists(Server.MapPath("~/Content/images/profile/" + comment.Author.UserName + ".png")))
                                         {
-                                            
+
                                             <a href="/ApplicationUsers/Details/@comment.Author.Id"><img class="img-circle" src="@imgUrl" height="45" width="45" alt="profile-user" /> @comment.Author.UserName</a>
                                         }
                                         else
                                         {
-                                            
+
                                             <a href="/ApplicationUsers/Details/@comment.Author.Id"><img class="img-circle" src="@imgDafault" height="45" width="45" alt="profile-default" /> @comment.Author.UserName</a>
                                         }
                                     }
@@ -100,26 +112,26 @@
                                     <small>@comment.Date</small>
                                     <small>@comment.Id</small>
                                 </span>
-                                <span>
-                                      @if (User.Identity.IsAuthenticated)
+                                <a class="hide-show" href="#">Reply</a>
+                                    <span class="file">
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            // <a href="/Replies/Create/" data-action="Create" data-tid="2"> Replay</a>
+                                            using (Html.BeginForm("Create", "Replies"))
                                             {
-                                                // <a href="/Replies/Create/" data-action="Create" data-tid="2"> Replay</a>
-                                                using (Html.BeginForm("Create", "Replies"))
-                                                {
-                                                    @Html.AntiForgeryToken()
-                                                    <textarea class="form-control-comment" rows="2" required name="Text"></textarea>
-                                                    <input class="form-control-comment" type="hidden" value="@comment.Id" name="CommentId"/>
+                                                @Html.AntiForgeryToken()
+                                                <textarea class="form-control-comment" rows="4" required name="Text"></textarea>
+                                                <input class="form-control-comment" type="hidden" value="@comment.Id" name="CommentId" />
                                                     <button type="submit" class="btn btn-success">Reply</button>
-                                                }
                                             }
-                                </span>
+                                        }
+                                    </span>
 
-                                
-                                <div class="border">
-                                    
+                                <div class="comment-reply">
+
                                     @foreach (var reply in ViewBag.replies)
                                     {
-                                        <div class="comment-meta">
+                                        <div class="reply-text">
                                             @if (reply != null && reply.CommentId == comment.Id)
                                             {
                                                 var replyImgUrl = Url.Content("~/Content/images/profile/" + reply.Author.UserName + ".png" + "? time=" + DateTime.Now);
@@ -129,12 +141,12 @@
                                                         if (File.Exists(Server.MapPath("~/Content/images/profile/" + reply.Author.UserName + ".png")))
                                                         {
 
-                                                            <a href="/ApplicationUsers/Details/@reply.Author.Id"><img class="img-circle" src="@replyImgUrl" height="45" width="45" alt="profile-user"/> @reply.Author.UserName</a>
+                                                            <a href="/ApplicationUsers/Details/@reply.Author.Id"><img class="img-circle" src="@replyImgUrl" height="45" width="45" alt="profile-user" /> @reply.Author.UserName</a>
                                                         }
                                                         else
                                                         {
 
-                                                            <a href="/ApplicationUsers/Details/@reply.Author.Id"><img class="img-circle" src="@replyImgDafault" height="45" width="45" alt="profile-default"/> @reply.Author.UserName</a>
+                                                            <a href="/ApplicationUsers/Details/@reply.Author.Id"><img class="img-circle" src="@replyImgDafault" height="45" width="45" alt="profile-default" /> @reply.Author.UserName</a>
                                                         }
                                                     }
                                                 </p>
@@ -148,23 +160,23 @@
                                                     <small>@reply.Date</small>
 
                                                 </span>
-                                              }
+                                                        }
 
-                                            
+
                                         </div>
-                                    }
+                                                        }
 
                                 </div>
-                                //Session["commentId"] = comment.Id;
-                                @*<div class="reply-form-controler" date role="reply-form">
-                                    <form class="reply-expanded">
-                                        <div class="postbox"></div>
-                                    </form>
-                                </div>*@
-                            }
-                        }
+                                                        //Session["commentId"] = comment.Id;
+                                                        @*<div class="reply-form-controler" date role="reply-form">
+                                                                <form class="reply-expanded">
+                                                                    <div class="postbox"></div>
+                                                                </form>
+                                                            </div>*@
+                                                            }
+                                                        }
                     </div>
-                }
+                                                        }
             </div>
         </dd>
     </dl>
