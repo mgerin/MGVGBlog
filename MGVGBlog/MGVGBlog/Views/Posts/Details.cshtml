@@ -122,7 +122,6 @@
                                 <span class="date">
                                     <span class="glyphicon glyphicon-time"></span>
                                     <small>@comment.Date</small>
-                                    <small>@comment.Id</small>
                                 </span>
                                 <a class="hide-show" href="#">Reply</a>
                                     <span class="file">
@@ -194,10 +193,9 @@
     </dl>
 </div>
 <p>
+    @Html.ActionLink("Back to List", "Index")
     @if (Model.Author.UserName == User.Identity.Name || User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+       @:| @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
     }
-    |
-    @Html.ActionLink("Back to List", "Index")
 </p>

@@ -17,7 +17,7 @@ namespace MGVGBlog.Controllers
         // GET: Comments
         public ActionResult Index()
         {
-            var comments = db.Comments.Include(c => c.Post);
+            var comments = db.Comments.Include(c => c.Post).OrderBy(c => c.Id);
             return View(comments.ToList());
         }
 

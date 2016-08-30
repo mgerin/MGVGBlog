@@ -1,4 +1,8 @@
-﻿@model IEnumerable<MGVGBlog.Models.Comments>
+﻿@using MGVGBlog.Controllers
+@using MGVGBlog.Models
+@using Microsoft.AspNet.Identity
+
+@model IEnumerable<MGVGBlog.Models.Comments>
 
 @{
     ViewBag.Title = "Index";
@@ -26,12 +30,18 @@
         </dd>
 
         <dd>
-            @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
-            @Html.ActionLink("Details", "Details", new {id = item.Id}) |
-            @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+            @Html.ActionLink("Details", "Details", new { id = item.Id })
+            
+            @if (User.IsInRole("Admin"))
+            {
+              @:| @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            }
+                        
+            
         </dd>
     </dl>
     <hr />
 }
 
-</table>
+
