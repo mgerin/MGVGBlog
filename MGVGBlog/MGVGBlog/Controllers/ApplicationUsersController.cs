@@ -20,28 +20,45 @@ namespace MGVGBlog.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+                return View(db.Users.ToList());
         }
 
         // GET: ApplicationUsers/Details/5
+        [Authorize]
         public ActionResult Details(string id)
         {
-            if (id == null)
+            if (User.IsInRole("Admin"))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                ApplicationUser applicationUser = db.Users.Find(id);
+                if (applicationUser == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(applicationUser);
             }
-            ApplicationUser applicationUser = db.Users.Find(id);
-            if (applicationUser == null)
+            else
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
-            return View(applicationUser);
         }
 
         // GET: ApplicationUsers/Create
+        [Authorize]
         public ActionResult Create()
         {
-            return View();
+            if (User.IsInRole("Admin"))
+            {
+                return View();
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+            
         }
 
         // POST: ApplicationUsers/Create
@@ -49,6 +66,7 @@ namespace MGVGBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
@@ -62,18 +80,27 @@ namespace MGVGBlog.Controllers
         }
 
         // GET: ApplicationUsers/Edit/5
+        [Authorize]
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            if (User.IsInRole("Admin"))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                ApplicationUser applicationUser = db.Users.Find(id);
+                if (applicationUser == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(applicationUser);
             }
-            ApplicationUser applicationUser = db.Users.Find(id);
-            if (applicationUser == null)
+            else
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
-            return View(applicationUser);
+            
         }
 
         // POST: ApplicationUsers/Edit/5
@@ -81,6 +108,7 @@ namespace MGVGBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
@@ -95,21 +123,30 @@ namespace MGVGBlog.Controllers
         // GET: ApplicationUsers/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (User.IsInRole("Admin"))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                ApplicationUser applicationUser = db.Users.Find(id);
+                if (applicationUser == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(applicationUser);
             }
-            ApplicationUser applicationUser = db.Users.Find(id);
-            if (applicationUser == null)
+            else
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
-            return View(applicationUser);
+            
         }
 
         // POST: ApplicationUsers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(string id)
         {
             ApplicationUser applicationUser = db.Users.Find(id);
