@@ -16,21 +16,11 @@ namespace MGVGBlog.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Posts
-        public ActionResult Index(string search)
+        public ActionResult Index()
         {
             List<Post> posts = db.Posts.Include(p => p.Author).OrderBy(p => p.Id).ToList();
-            var result = new List<Post>();
-            if (search != null)
-            {
-                result = posts.ToList().Where(p => p.Body.ToLower().Contains(search.ToLower())).ToList();
-            }
-            else
-            {
-                result = posts;
-            }
-            
-            ViewBag.posts = result;
-            return View(posts.ToList());
+            ViewBag.posts = posts;
+            return View(db.Posts.ToList());
         }
 
         // GET: Posts/Details/5
@@ -151,14 +141,6 @@ namespace MGVGBlog.Controllers
             db.Posts.Remove(post);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        public ActionResult Like(int id, int postId)
-        {
-            Comments update = db.Comments.ToList().Find(u => u.Id == id);
-            update.Points += 1;
-            db.SaveChanges();
-            return RedirectToAction("Details", "Posts", new { id = postId});
         }
 
         protected override void Dispose(bool disposing)

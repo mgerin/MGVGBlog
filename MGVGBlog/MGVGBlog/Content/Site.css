@@ -23,20 +23,22 @@ select,
 textarea {
     max-width: 280px;
 }
+
 .dl-horizontal .border {
-      padding-top: 5px;
-      padding-bottom: 60px;
-  }
-  .dl-horizontal .comment-meta {
-      
-      padding: -40px;
-      padding-bottom: 5px;
-      text-align: left;
-      margin: 40px;
-  }
-  .dl-horizontal .comment-meta .date {
-      float: right;
-  }
+    padding-top: 5px;
+    padding-bottom: 60px;
+}
+
+.dl-horizontal .comment-meta {
+    padding: -40px;
+    padding-bottom: 5px;
+    text-align: left;
+    margin: 40px;
+}
+
+    .dl-horizontal .comment-meta .date {
+        float: right;
+    }
 
 
 .glyphicon-user {
@@ -53,40 +55,47 @@ textarea {
     top: 20px;
     right: 13px;
 }
+
 .form-control-comment {
     max-width: 100%;
     width: 100%;
     border: 1px solid #128f76;
 }
+
 body {
     background: white;
 }
+
 .body-content {
     background: whitesmoke;
 }
+
 .profile-photo a {
     bottom: 5px;
     font-style: normal;
 }
+
 .form-control-post {
     max-width: 100%;
     width: 50%;
     border: 1px solid #128f76;
 }
+
 .comment-reply {
     margin-left: 100px;
     margin-top: 50px;
 }
+
 .reply-text {
     margin-bottom: 40px;
     margin-top: 40px;
 }
-.search {
-    float: right;
-}
-.form-control-new-post {
-    max-width: 90%;
-    width: 100%;
-    border: 1px solid #128f76;
-    
+
+.hide-show {
+    background: #4e69a2;
+    color: white;
+    border: 1px black;
+    border-radius: 4px;
+    font-size: 12px;
+    padding-top: 2px;
 }

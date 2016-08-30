@@ -340,6 +340,7 @@ D:\Stuff\SoftUni\MGVGBlog\MGVGBlog\bin\Microsoft.Owin.Security.OAuth.xml
 D:\Stuff\SoftUni\MGVGBlog\MGVGBlog\bin\Microsoft.Owin.Security.Google.xml
 D:\Stuff\SoftUni\MGVGBlog\MGVGBlog\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Stuff\SoftUni\MGVGBlog\MGVGBlog\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Stuff\SoftUni\MGVGBlog\MGVGBlog\obj\Debug\MGVGBlog.csprojResolveAssemblyReference.cache
 D:\Stuff\SoftUni\MGVGBlog\MGVGBlog\obj\Debug\MGVGBlog.dll
 D:\Stuff\SoftUni\MGVGBlog\MGVGBlog\obj\Debug\MGVGBlog.pdb
 D:\SoftUni\CSharpWeb\MGVGBlog\MGVGBlog\bin\roslyn\csc.exe

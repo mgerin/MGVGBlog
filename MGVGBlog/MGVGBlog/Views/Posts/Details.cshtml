@@ -8,23 +8,25 @@
         .ready(function() {
             $('.file').hide();
 
-            $('a.hide-show')
+            $('button.hide-show')
                 .click(function() {
                     $('span.file', this.parentNode).slideToggle(0);
-                    $(this).text($(this).text() == 'Cancel' ? 'Reply' : 'Cancel');
+                    $(this).text($(this).text() == 'Reply' ? 'Reply' : 'Cancel');
                     $(this).toggleClass("active");
                     return false;
                 });
         });
 </script>
-@*<script>
-    $('#a_is_valid').on('click', handleClick)
-    function handleClick() {
-        $(this).off('click');
-        alert('click');
-    }
-    $('#a_is_valid2').one('click', function () { alert('just once') });
-</script>*@
+<span id="fb-root"></span>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=143058786140237";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 @{
     ViewBag.Title = "Details";
 }
@@ -114,16 +116,13 @@
                                     }
                                 </p>
                                 <p>@comment.Text</p>
-                                @comment.Points
-                                        <span class="glyphicon glyphicon-thumbs-up"></span>
-                                @Html.ActionLink("Like","Like",  new { id = comment.Id , postId = comment.PostId}, new { @id = "a_is_valid" } )
-                                <span>|</span>
-                                <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-down"></a>
+                                <button class="hide-show">Reply</button>
+                                <span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="true"></span>
                                 <span class="date">
                                     <span class="glyphicon glyphicon-time"></span>
                                     <small>@comment.Date</small>
+                                    <small>@comment.Id</small>
                                 </span>
-                                <a class="hide-show" href="#">Reply</a>
                                     <span class="file">
                                         @if (User.Identity.IsAuthenticated)
                                         {
@@ -163,9 +162,7 @@
                                                 </p>
 
                                                 <p>@reply.Text</p>
-                                                <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-up"></a>
-                                                <span>|</span>
-                                                <a href="Oshte ne e gotovo" class="glyphicon glyphicon-thumbs-down"></a>
+                                                <span class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="true"></span>
                                                 <span class="date">
                                                     <span class="glyphicon glyphicon-time"></span>
                                                     <small>@reply.Date</small>
@@ -193,9 +190,10 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index")
     @if (Model.Author.UserName == User.Identity.Name || User.IsInRole("Admin"))
     {
-       @:| @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
     }
+    |
+    @Html.ActionLink("Back to List", "Index")
 </p>
