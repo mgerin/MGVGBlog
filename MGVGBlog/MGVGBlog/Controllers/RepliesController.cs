@@ -84,7 +84,7 @@ namespace MGVGBlog.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CommentsId = new SelectList(db.Comments, "Id", "Text", reply.CommentId);
+            ViewBag.CommentsId = new SelectList(db.Comments, "Id", "Text", reply.CommentId, "reply.PostId");
             return View(reply);
         }
 
@@ -93,7 +93,7 @@ namespace MGVGBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Text,CommentId,Date,Points")] Reply reply)
+        public ActionResult Edit([Bind(Include = "Id,Text,CommentId,Date,Points,PostId")] Reply reply)
         {
             if (ModelState.IsValid)
             {

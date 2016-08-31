@@ -411,3 +411,4 @@ D:\SoftUni\CSharpWeb\MGVGBlog\MGVGBlog\bin\Microsoft.Owin.Security.Twitter.xml
 D:\SoftUni\CSharpWeb\MGVGBlog\MGVGBlog\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\SoftUni\CSharpWeb\MGVGBlog\MGVGBlog\obj\Debug\MGVGBlog.dll
 D:\SoftUni\CSharpWeb\MGVGBlog\MGVGBlog\obj\Debug\MGVGBlog.pdb
+D:\SoftUni\CSharpWeb\MGVGBlog\MGVGBlog\obj\Debug\MGVGBlog.csprojResolveAssemblyReference.cache
