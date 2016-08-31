@@ -38,6 +38,7 @@ namespace MGVGBlog.Controllers
         }
 
         // GET: Comments/Create
+        [Authorize]
         public ActionResult Create()
         {
             
@@ -48,6 +49,7 @@ namespace MGVGBlog.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Text,PostId,Date,Points")] Comments comments)
         {
@@ -67,11 +69,16 @@ namespace MGVGBlog.Controllers
         }
 
         // GET: Comments/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (ViewBag.postAuthor != User.Identity.Name && User.IsInRole("Member"))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
             Comments comments = db.Comments.Find(id);
             if (comments == null)
@@ -86,6 +93,7 @@ namespace MGVGBlog.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Text,PostId,Date,Points")] Comments comments)
         {
@@ -100,11 +108,16 @@ namespace MGVGBlog.Controllers
         }
 
         // GET: Comments/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (ViewBag.postAuthor != User.Identity.Name && User.IsInRole("Member"))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
             Comments comments = db.Comments.Find(id);
             if (comments == null)
@@ -116,6 +129,7 @@ namespace MGVGBlog.Controllers
 
         // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

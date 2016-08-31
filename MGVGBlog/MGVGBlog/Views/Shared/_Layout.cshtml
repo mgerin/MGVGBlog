@@ -21,14 +21,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                   <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Posts", "Index", "Posts")</li>
                     @if (Request.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("New Post", "Create", "Posts")</li>
                     }
-                    <li>@Html.ActionLink("Comments", "Index", "Comments")</li>
-                    @if (Request.IsAuthenticated)
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Comments", "Index", "Comments")</li>
+                    }
+                    <li></li>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Replies", "Index", "Replies")</li>
                     }

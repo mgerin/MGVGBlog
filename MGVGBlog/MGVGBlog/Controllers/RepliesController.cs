@@ -75,6 +75,10 @@ namespace MGVGBlog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            if (ViewBag.postAuthor != User.Identity.Name && User.IsInRole("Member"))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             Reply reply = db.Replies.Find(id);
             if (reply == null)
             {
@@ -107,6 +111,10 @@ namespace MGVGBlog.Controllers
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (ViewBag.postAuthor != User.Identity.Name && User.IsInRole("Member"))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
             Reply reply = db.Replies.Find(id);
             if (reply == null)
