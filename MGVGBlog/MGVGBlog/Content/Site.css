@@ -99,3 +99,6 @@ body {
     font-size: 12px;
     padding-top: 2px;
 }
+.search {
+    float: right;
+}

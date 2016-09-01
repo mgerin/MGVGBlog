@@ -5,8 +5,13 @@
 }
 
 <h2>Posts</h2>
-
-
+@using (Html.BeginForm("Index", "Posts", FormMethod.Get))
+{
+    <span class="search">
+        @Html.TextBox("search")
+        <input type="submit" value="Search" />
+    </span>
+}
 
 @foreach (var post in ViewBag.posts) {
     <dl class="dl-horizontal">
